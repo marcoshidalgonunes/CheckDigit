@@ -1,6 +1,6 @@
 ﻿namespace CheckDigit;
 
-interface ICompute
+public interface ICompute
 {
     int Calculate(long number);
 
@@ -8,9 +8,5 @@ interface ICompute
 
     bool Validate(long number);
 
-    bool Validate(long number, int digit);
-
     bool Validate(string value);
-
-    bool Validate(string value, string digit);
 }

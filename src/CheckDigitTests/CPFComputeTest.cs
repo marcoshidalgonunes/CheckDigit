@@ -1,19 +1,16 @@
-using CheckDigit;
+﻿using CheckDigit;
 
 namespace CheckDigitTests;
 
-/// <summary>
-/// Examples from https://www.cjdinfo.com.br/publicacao-calculo-digito-verificador
-/// </summary>
-public class Modulus11ComputeTest
+public class CPFComputeTest
 {
     [Fact]
     public void CalculateLong()
     {
         // Arrange
-        long number = 261533;
-        int digit = 9;
-        IModulusCompute compute = new Modulus11Compute();
+        long number = 123456789;
+        int digit = 09;
+        IModulusCompute compute = new CPFCompute();
 
         // Act
         int result = compute.Calculate(number);
@@ -26,9 +23,9 @@ public class Modulus11ComputeTest
     public void CalculateString()
     {
         // Arrange
-        string number = "261533";
-        string digit = "9";
-        IModulusCompute compute = new Modulus11Compute();
+        string number = "123456789";
+        string digit = "09";
+        IModulusCompute compute = new CPFCompute();
 
         // Act
         string result = compute.Calculate(number);
@@ -41,8 +38,8 @@ public class Modulus11ComputeTest
     public void ValidateLong()
     {
         // Arrange
-        long number = 2615339;
-        IModulusCompute compute = new Modulus11Compute();
+        long number = 12345678909;
+        IModulusCompute compute = new CPFCompute();
 
         // Act
         bool result = compute.Validate(number);
@@ -55,8 +52,8 @@ public class Modulus11ComputeTest
     public void ValidateString()
     {
         // Arrange
-        string number = "2615339";
-        IModulusCompute compute = new Modulus11Compute();
+        string number = "12345678909";
+        IModulusCompute compute = new CPFCompute();
 
         // Act
         bool result = compute.Validate(number);
@@ -69,9 +66,9 @@ public class Modulus11ComputeTest
     public void ValidateDigitLong()
     {
         // Arrange
-        long number = 261533;
-        int digit = 9;
-        IModulusCompute compute = new Modulus11Compute();
+        long number = 123456789;
+        int digit = 09;
+        IModulusCompute compute = new CPFCompute();
 
         // Act
         bool result = compute.Validate(number, digit);
@@ -84,9 +81,9 @@ public class Modulus11ComputeTest
     public void ValidateDigitString()
     {
         // Arrange
-        string number = "261533";
-        string digit = "9";
-        IModulusCompute compute = new Modulus11Compute();
+        string number = "123456789";
+        string digit = "09";
+        IModulusCompute compute = new CPFCompute();
 
         // Act
         bool result = compute.Validate(number, digit);

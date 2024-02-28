@@ -5,23 +5,24 @@ namespace CheckDigit;
 public class Modulus11Compute : Compute
 {
     public Modulus11Compute() 
-    {
-        ComputeDivider = Modulus11Helper.CalculateDivider;
-    }
+        : this(Modulus11Helper.CalculateMultiplier, Modulus11Helper.CalculateDigit) { }
+
+    protected Modulus11Compute(Func<int, int> computeMultiplier, Func<long, int> computeDigit)
+        : base(computeMultiplier, computeDigit) { }
 
     public override int Calculate(long number)
     {
         long sum = 0;
-        int divisor = 1;
+        int multiplier = 1;
         do
         {
-            divisor = ComputeDivider(divisor);
+            multiplier = ComputeMultiplier(multiplier);
 
-            sum += number % 10 * divisor;
+            sum += number % 10 * multiplier;
             number /= 10;
         } while (number > 0);
 
-        return Modulus11Helper.CalculateDigit(sum);
+        return ComputeDigit(sum);
     }
 
     public override bool Validate(long number) => Validate(number / 10, (int)(number % 10));
