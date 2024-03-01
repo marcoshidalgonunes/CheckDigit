@@ -2,6 +2,9 @@
 
 namespace CheckDigit;
 
+/// <summary>
+/// Modulus 11 calculation.
+/// </summary>
 public class Modulus11Compute : Compute
 {
     public Modulus11Compute() 
@@ -10,6 +13,11 @@ public class Modulus11Compute : Compute
     protected Modulus11Compute(Func<int, int> computeMultiplier, Func<long, int> computeDigit)
         : base(computeMultiplier, computeDigit) { }
 
+    /// <summary>
+    /// Calculate modulus 11.
+    /// </summary>
+    /// <param name="number">Number to calculate modulus 11</param>
+    /// <returns>Calculated modulus</returns>
     public override int Calculate(long number)
     {
         long sum = 0;
@@ -24,8 +32,4 @@ public class Modulus11Compute : Compute
 
         return ComputeDigit(sum);
     }
-
-    public override bool Validate(long number) => Validate(number / 10, (int)(number % 10));
-
-    public override bool Validate(long number, int digit) => digit.Equals(Calculate(number));
 }
