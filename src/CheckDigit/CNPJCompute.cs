@@ -1,13 +1,83 @@
-﻿using CheckDigit.Helpers;
-using System.Globalization;
+﻿using System.Text.RegularExpressions;
+using CheckDigit.Helpers;
 
 namespace CheckDigit;
+
 
 /// <summary>
 /// Valida dígitos de CNPJ
 /// </summary>
-public sealed class CNPJCompute : ICNPJCompute
+public sealed partial class CNPJCompute : ICNPJCompute
 {
+    [GeneratedRegex("[\\./-]")]
+    private static partial Regex CNPJFormatRegex();
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+    private Func<int, int> ComputeMultiplier;
+
+    private Func<long, int> ComputeDigit;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+    public CNPJCompute()
+        : this(Modulus11Helper.CalculateMultiplier, Modulus11Helper.CalculateDigit) { }
+
+    private CNPJCompute(Func<int, int> computeMultiplier, Func<long, int> computeDigit)
+    {
+        ComputeMultiplier = computeMultiplier;
+        ComputeDigit = computeDigit;
+    }
+
+    private long CalculateDigit(long valor)
+    {
+        long somatorio = 0;
+        int multiplicador = 1;
+        do
+        {
+            multiplicador = ComputeMultiplier(multiplicador);
+
+            somatorio += valor % 10 * multiplicador;
+            valor /= 10;
+        } while (valor > 0);
+
+        return ComputeDigit(somatorio % 11);
+    }
+
+    private string CalculateDigit(string valor)
+    {
+        long somatorio = 0;
+        int multiplicador = 1;
+
+        for (int posicao = valor.Length - 1; posicao >= 0; posicao--)
+        {
+            multiplicador = ComputeMultiplier(multiplicador);
+
+            int digito = valor[posicao] - '0';
+            somatorio += digito * multiplicador;
+        }
+
+        return ComputeDigit(somatorio % 11).ToString();
+    }
+
+    private static string Cleanup(string value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+
+        if (CNPJFormatRegex().IsMatch(value) && !Regex.IsMatch(value, "[0-9A-Z]{2}[\\.][0-9A-Z]{3}[\\.][0-9A-Z]{3}[/][0-9A-Z]{4}-[0-9]{2}"))
+        {
+           throw new ArgumentException("CNPJ deve estar no formato XX.XXX.XXXX/XXXX-00");
+        }
+
+        string cnpj = CNPJFormatRegex().Replace(value, "");
+        if (!Regex.IsMatch(cnpj, "[0-9A-Z]{12}[0-9]{2}"))
+        {
+            throw new ArgumentException("CNPJ deve estar no formato XXXXXXXXXXXX00");
+        }
+
+        return cnpj;
+    }
+
+    #region ICNPJCompute members
+
     /// <summary>
     /// Calcula dígito de CNPJ.
     /// </summary>
@@ -26,9 +96,9 @@ public sealed class CNPJCompute : ICNPJCompute
     /// <returns>Dígito do CNPJ</returns>
     public int Calculate(long cnpj)
     {
-        int digito = CalculateDigito(cnpj);
+        long digito = CalculateDigit(cnpj);
         cnpj = cnpj * 10 + digito;
-        return (digito * 10) + CalculateDigito(cnpj);
+        return (int)((digito * 10) + CalculateDigit(cnpj));
     }
 
     /// <summary>
@@ -39,7 +109,7 @@ public sealed class CNPJCompute : ICNPJCompute
     /// <returns>Dígito do CNPJ</returns>
     public string Calculate(string cnpj, string filial)
     {
-        return Calculate(cnpj.ConvertToInt64(), filial.ConvertToInt32()).ToString("00", CultureInfo.InvariantCulture);
+        return Calculate(cnpj + filial);
     }
 
     /// <summary>
@@ -49,22 +119,14 @@ public sealed class CNPJCompute : ICNPJCompute
     /// <returns>Dígito do CNPJ</returns>
     public string Calculate(string valor)
     {
-        return Calculate(valor.ConvertToInt64()).ToString();
-    }
-
-    private static int CalculateDigito(long numero)
-    {
-        long somatorio = 0;
-        int divisor = 1;
-        do
+        string cnpj = CNPJFormatRegex().Replace(valor, "");
+        if (!Regex.IsMatch(cnpj, "[0-9A-Z]{12}"))
         {
-            divisor = Modulus11Helper.CalculateMultiplier(divisor);
+            throw new ArgumentException("CNPJ deve estar no formato XXXXXXXXXXXX");
+        }
 
-            somatorio += numero % 10 * divisor;
-            numero /= 10;
-        } while (numero > 0);
-
-        return Modulus11Helper.CalculateDigit((int)(somatorio % 11));
+        string digito = CalculateDigit(cnpj);
+        return digito + CalculateDigit(cnpj + digito);
     }
 
     /// <summary>
@@ -101,7 +163,7 @@ public sealed class CNPJCompute : ICNPJCompute
     /// <returns>True para número do CNPJ válido</returns>
     public bool Validate(string cnpj, string filial, string dv)
     {
-        return dv.Equals(Calculate(cnpj, filial));
+        return Validate(cnpj + filial + dv);
     }
 
     /// <summary>
@@ -111,6 +173,14 @@ public sealed class CNPJCompute : ICNPJCompute
     /// <returns>True para número do CNPJ válido</returns>
     public bool Validate(string valor)
     {
-        return Validate(valor.ConvertToInt64());
+        const int tamanhoDV = 2;
+
+        string cnpj = Cleanup(valor);
+        string cnpjBase = cnpj[..^tamanhoDV];
+        string digitos = cnpj[^tamanhoDV..];
+
+        return Calculate(cnpjBase).Equals(digitos);
     }
+
+    #endregion
 }
