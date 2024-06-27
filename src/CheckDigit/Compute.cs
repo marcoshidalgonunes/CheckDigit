@@ -1,4 +1,6 @@
-﻿namespace CheckDigit;
+﻿using CheckDigit.Extensions;
+
+namespace CheckDigit;
 
 /// <summary>
 /// Base class for modulus calculation.

@@ -70,6 +70,42 @@ namespace CheckDigit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CNPJ deve estar no formato XXXXXXXXXXXX.
+        /// </summary>
+        internal static string InvalidCNPJ {
+            get {
+                return ResourceManager.GetString("InvalidCNPJ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNPJ deve estar no formato XXXXXXXXXXXX99.
+        /// </summary>
+        internal static string InvalidCNPJCleanedFormat {
+            get {
+                return ResourceManager.GetString("InvalidCNPJCleanedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99.
+        /// </summary>
+        internal static string InvalidCNPJFormat {
+            get {
+                return ResourceManager.GetString("InvalidCNPJFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPF deve estar no formato 999.999.999-99.
+        /// </summary>
+        internal static string InvalidCPFFormat {
+            get {
+                return ResourceManager.GetString("InvalidCPFFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Não foi informado um número para efetuar o cálculo.
         /// </summary>
         internal static string InvalidNumber {

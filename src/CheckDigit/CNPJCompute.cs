@@ -3,13 +3,15 @@ using CheckDigit.Helpers;
 
 namespace CheckDigit;
 
-
 /// <summary>
 /// Valida dígitos de CNPJ
 /// </summary>
 public sealed partial class CNPJCompute : ICNPJCompute
 {
     [GeneratedRegex("[\\./-]")]
+    private static partial Regex CNPJMaskRegex();
+
+    [GeneratedRegex("[0-9A-Z]{2}[\\.][0-9A-Z]{3}[\\.][0-9A-Z]{3}[/][0-9A-Z]{4}-[0-9]{2}")]
     private static partial Regex CNPJFormatRegex();
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -62,15 +64,15 @@ public sealed partial class CNPJCompute : ICNPJCompute
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(value);
 
-        if (CNPJFormatRegex().IsMatch(value) && !Regex.IsMatch(value, "[0-9A-Z]{2}[\\.][0-9A-Z]{3}[\\.][0-9A-Z]{3}[/][0-9A-Z]{4}-[0-9]{2}"))
+        if (CNPJMaskRegex().IsMatch(value) && !CNPJFormatRegex().IsMatch(value))
         {
-           throw new ArgumentException("CNPJ deve estar no formato XX.XXX.XXXX/XXXX-00");
+           throw new ArgumentException(CheckDigit.InvalidCNPJFormat);
         }
 
-        string cnpj = CNPJFormatRegex().Replace(value, "");
+        string cnpj = CNPJMaskRegex().Replace(value, string.Empty);
         if (!Regex.IsMatch(cnpj, "[0-9A-Z]{12}[0-9]{2}"))
         {
-            throw new ArgumentException("CNPJ deve estar no formato XXXXXXXXXXXX00");
+            throw new ArgumentException(CheckDigit.InvalidCNPJCleanedFormat);
         }
 
         return cnpj;
@@ -119,10 +121,10 @@ public sealed partial class CNPJCompute : ICNPJCompute
     /// <returns>Dígito do CNPJ</returns>
     public string Calculate(string valor)
     {
-        string cnpj = CNPJFormatRegex().Replace(valor, "");
+        string cnpj = CNPJMaskRegex().Replace(valor, "");
         if (!Regex.IsMatch(cnpj, "[0-9A-Z]{12}"))
         {
-            throw new ArgumentException("CNPJ deve estar no formato XXXXXXXXXXXX");
+            throw new ArgumentException(CheckDigit.InvalidCNPJ);
         }
 
         string digito = CalculateDigit(cnpj);

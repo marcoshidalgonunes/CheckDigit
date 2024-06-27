@@ -1,4 +1,4 @@
-﻿namespace CheckDigit;
+﻿namespace CheckDigit.Extensions;
 
 internal static class ComputeExtensions
 {

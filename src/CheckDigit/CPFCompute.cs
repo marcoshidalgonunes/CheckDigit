@@ -1,14 +1,36 @@
 ﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using CheckDigit.Extensions;
 
 namespace CheckDigit;
 
 /// <summary>
 /// Valida dígitos de CPF
 /// </summary>
-public sealed class CPFCompute : Modulus11Compute
+public sealed partial class CPFCompute : Modulus11Compute
 {
+    [GeneratedRegex("[\\.-]")]
+    private static partial Regex CPFMaskRegex();
+
+    [GeneratedRegex("[0-9]{3}[\\.][0-9]{3}[\\.][0-9]{3}-[0-9]{2}")]
+    private static partial Regex CPFFormatRegex();
+
     public CPFCompute() 
         : base(n => { return ++n; }, CalculateDigit) { }
+
+    private static string Cleanup(string value)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(value);
+
+        if (CPFMaskRegex().IsMatch(value) && !CPFFormatRegex().IsMatch(value))
+        {
+            throw new ArgumentException(CheckDigit.InvalidCPFFormat);
+        }
+
+        return CPFMaskRegex().Replace(value, string.Empty);
+    }
+
+    #region IModulusCompute members
 
     /// <summary>
     /// Calcula dígito de CPF.
@@ -47,4 +69,17 @@ public sealed class CPFCompute : Modulus11Compute
     {
         return Validate(cpf / 100, (int)(cpf % 100));
     }
+
+    public override bool Validate(string cpf, string dv)
+    {
+        return Validate(cpf + dv);
+    }
+
+    public override bool Validate(string value)
+    {
+        string cpf = Cleanup(value);
+        return base.Validate(cpf);
+    }
+
+    #endregion
 }
