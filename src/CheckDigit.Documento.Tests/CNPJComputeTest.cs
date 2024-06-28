@@ -1,6 +1,4 @@
-﻿using CheckDigit;
-
-namespace CheckDigitTests;
+﻿namespace CheckDigit.Documento.Tests;
 
 public class CNPJComputeTest
 {
@@ -119,11 +117,11 @@ public class CNPJComputeTest
         ICNPJCompute compute = new CNPJCompute();
 
         // Act
-        Action act = () => compute.Validate(cnpj);
+        void act() => compute.Validate(cnpj);
 
         // Assert
         ArgumentException exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("CNPJ deve estar no formato XX.XXX.XXXX/XXXX-00", exception.Message);
+        Assert.Equal("CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99", exception.Message);
     }
 
     [Fact]
@@ -180,11 +178,11 @@ public class CNPJComputeTest
         ICNPJCompute compute = new CNPJCompute();
 
         // Act
-        Action act = () => compute.Validate(cnpj, filial, digito);
+        void act() => compute.Validate(cnpj, filial, digito);
 
         // Assert
         ArgumentException exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("CNPJ deve estar no formato XXXXXXXXXXXX00", exception.Message);
+        Assert.Equal("CNPJ deve estar no formato XXXXXXXXXXXX99", exception.Message);
     }
 
     [Fact]

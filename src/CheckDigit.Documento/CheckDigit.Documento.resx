@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidBranch" xml:space="preserve">
-    <value>Para caclulo de CNPJ deve-se informar a Filial</value>
+  <data name="InvalidCNPJ" xml:space="preserve">
+    <value>CNPJ deve estar no formato XXXXXXXXXXXX</value>
   </data>
-  <data name="InvalidNumber" xml:space="preserve">
-    <value>Não foi informado um número para efetuar o cálculo</value>
+  <data name="InvalidCNPJCleanedFormat" xml:space="preserve">
+    <value>CNPJ deve estar no formato XXXXXXXXXXXX99</value>
+  </data>
+  <data name="InvalidCNPJFormat" xml:space="preserve">
+    <value>CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99</value>
+  </data>
+  <data name="InvalidCPFFormat" xml:space="preserve">
+    <value>CPF deve estar no formato 999.999.999-99</value>
   </data>
 </root>

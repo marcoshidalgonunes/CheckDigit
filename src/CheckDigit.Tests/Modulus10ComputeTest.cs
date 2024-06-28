@@ -1,6 +1,4 @@
-﻿using CheckDigit;
-
-namespace CheckDigitTests;
+﻿namespace CheckDigit.Tests;
 
 public class Modulus10ComputeTest
 {

@@ -1,6 +1,4 @@
-﻿using CheckDigit;
-
-namespace CheckDigitTests;
+﻿namespace CheckDigit.Documento.Tests;
 
 public class CPFComputeTest
 {

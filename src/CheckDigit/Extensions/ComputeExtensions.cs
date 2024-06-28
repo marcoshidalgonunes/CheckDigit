@@ -1,8 +1,8 @@
 ﻿namespace CheckDigit.Extensions;
 
-internal static class ComputeExtensions
+public static class ComputeExtensions
 {
-    internal static int ConvertToInt32(this string valor)
+    public static int ConvertToInt32(this string valor)
     {
         if (!int.TryParse(valor, out int number))
         {
@@ -12,7 +12,7 @@ internal static class ComputeExtensions
         return number;
     }
 
-    internal static long ConvertToInt64(this string valor)
+    public static long ConvertToInt64(this string valor)
     {
         if (!long.TryParse(valor, out long number))
         {

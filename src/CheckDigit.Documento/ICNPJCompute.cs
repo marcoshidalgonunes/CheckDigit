@@ -1,4 +1,4 @@
-﻿namespace CheckDigit;
+﻿namespace CheckDigit.Documento;
 
 /// <summary>
 /// Interface para cálculo de CNPJ

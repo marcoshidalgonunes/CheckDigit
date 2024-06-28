@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using CheckDigit.Extensions;
 
-namespace CheckDigit;
+namespace CheckDigit.Documento;
 
 /// <summary>
 /// Valida dígitos de CPF
@@ -24,7 +24,7 @@ public sealed partial class CPFCompute : Modulus11Compute
 
         if (CPFMaskRegex().IsMatch(value) && !CPFFormatRegex().IsMatch(value))
         {
-            throw new ArgumentException(CheckDigit.InvalidCPFFormat);
+            throw new ArgumentException(CheckDigit_Documento.InvalidCPFFormat);
         }
 
         return CPFMaskRegex().Replace(value, string.Empty);

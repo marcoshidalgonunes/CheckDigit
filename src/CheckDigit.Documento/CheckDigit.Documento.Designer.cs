@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CheckDigit {
+namespace CheckDigit.Documento {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CheckDigit {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CheckDigit {
+    internal class CheckDigit_Documento {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CheckDigit() {
+        internal CheckDigit_Documento() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CheckDigit {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CheckDigit.CheckDigit", typeof(CheckDigit).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CheckDigit.Documento.CheckDigit.Documento", typeof(CheckDigit_Documento).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,38 @@ namespace CheckDigit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Para caclulo de CNPJ deve-se informar a Filial.
+        ///   Looks up a localized string similar to CNPJ deve estar no formato XXXXXXXXXXXX.
         /// </summary>
-        internal static string InvalidBranch {
+        internal static string InvalidCNPJ {
             get {
-                return ResourceManager.GetString("InvalidBranch", resourceCulture);
+                return ResourceManager.GetString("InvalidCNPJ", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Não foi informado um número para efetuar o cálculo.
+        ///   Looks up a localized string similar to CNPJ deve estar no formato XXXXXXXXXXXX99.
         /// </summary>
-        internal static string InvalidNumber {
+        internal static string InvalidCNPJCleanedFormat {
             get {
-                return ResourceManager.GetString("InvalidNumber", resourceCulture);
+                return ResourceManager.GetString("InvalidCNPJCleanedFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99.
+        /// </summary>
+        internal static string InvalidCNPJFormat {
+            get {
+                return ResourceManager.GetString("InvalidCNPJFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPF deve estar no formato 999.999.999-99.
+        /// </summary>
+        internal static string InvalidCPFFormat {
+            get {
+                return ResourceManager.GetString("InvalidCPFFormat", resourceCulture);
             }
         }
     }

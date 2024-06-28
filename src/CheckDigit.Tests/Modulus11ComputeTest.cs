@@ -1,6 +1,4 @@
-using CheckDigit;
-
-namespace CheckDigitTests;
+namespace CheckDigit.Tests;
 
 /// <summary>
 /// Examples from https://www.cjdinfo.com.br/publicacao-calculo-digito-verificador
