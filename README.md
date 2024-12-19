@@ -1,12 +1,16 @@
-# CheckDigit
+# Check Digit
 
-This project contains some routines to compute check digits.
+This repository contains .NET Core library projects and corresponding test projects to compute check digits using Modulus 10 and 11 algorithms.
 
-## Português
+## CheckDigit
 
-Este projeto contém rotinas apra calcular digitos verificadores. Entre elas cálculo de CNPJ e CPF conforme [Cálculo Digito Módulo 11](https://www.cjdinfo.com.br/utilitario-calculo-digito-modulo-11).
+Library containing base classes to compute check digits using Modulus 10 and 11 algorithms.
 
-# Cnpj AlfaNumérico
+## CheckDigit.Documento
+
+Biblioteca de rotinas para calcular digitos verificadores de documentos usados no Brasil (CPF e CNPJ), conforme [Cálculo Digito Módulo 11](https://www.cjdinfo.com.br/utilitario-calculo-digito-modulo-11).
+
+### CNPJ AlfaNumérico
 
 O cálculo de CNPJ foi atualizado para suportar o novo formato estabelecido pela Receita Federal, que combina números e letras (CNPJ Alfanumérico), conforme a Nota Técnica COCAD/SUARA/RFB nº 49/2024. **O formato original somente com números permance suportado.**
 
