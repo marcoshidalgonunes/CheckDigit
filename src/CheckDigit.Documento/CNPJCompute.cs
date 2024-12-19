@@ -14,6 +14,9 @@ public sealed partial class CNPJCompute : ICNPJCompute
     [GeneratedRegex("[0-9A-Z]{2}[\\.][0-9A-Z]{3}[\\.][0-9A-Z]{3}[/][0-9A-Z]{4}-[0-9]{2}")]
     private static partial Regex CNPJFormatRegex();
 
+    [GeneratedRegex("[0-9A-Z]{12}")]
+    private static partial Regex CNPJValueRegex();
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     private readonly Func<int, int> _computeMultiplier;
 
@@ -122,7 +125,7 @@ public sealed partial class CNPJCompute : ICNPJCompute
     public string Calculate(string valor)
     {
         string cnpj = CNPJMaskRegex().Replace(valor, "");
-        if (!Regex.IsMatch(cnpj, "[0-9A-Z]{12}"))
+        if (!CNPJValueRegex().IsMatch(cnpj))
         {
             throw new ArgumentException(CheckDigit_Documento.InvalidCNPJ);
         }
