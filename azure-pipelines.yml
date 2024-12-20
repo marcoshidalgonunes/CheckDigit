@@ -12,7 +12,7 @@ steps:
     packageType: 'sdk'
     version: '8.0.100'
 
-- script: dotnet restore
+- script: dotnet restore src/CheckDigit.sln
   displayName: 'Restore NuGet Packages'
 
 - script: dotnet test
