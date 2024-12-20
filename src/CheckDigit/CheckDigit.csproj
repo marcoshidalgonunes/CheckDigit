@@ -12,17 +12,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="CheckDigit.Designer.cs">
+    <Compile Remove="Resources\Messages.en.Designer.cs" />
+    <Compile Remove="Resources\Messages.pt.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.pt.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CheckDigit.resx</DependentUpon>
+      <DependentUpon>Messages.pt.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CheckDigit.resx">
+    <EmbeddedResource Update="Messages.pt.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CheckDigit.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.pt.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.en.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.en.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Messages.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -117,10 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidBranch" xml:space="preserve">
-    <value>Para caclulo de CNPJ deve-se informar a Filial</value>
-  </data>
   <data name="InvalidNumber" xml:space="preserve">
-    <value>Não foi informado um número para efetuar o cálculo</value>
+    <value>Não foi informado um número para verificar dígito</value>
   </data>
 </root>

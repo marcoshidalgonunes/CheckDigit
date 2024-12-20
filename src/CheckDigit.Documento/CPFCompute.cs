@@ -24,7 +24,7 @@ public sealed partial class CPFCompute : Modulus11Compute
 
         if (CPFMaskRegex().IsMatch(value) && !CPFFormatRegex().IsMatch(value))
         {
-            throw new ArgumentException(CheckDigit_Documento.InvalidCPFFormat);
+            throw new ArgumentException(ResourcesFacade.GetString("InvalidCPFFormat"));
         }
 
         return CPFMaskRegex().Replace(value, string.Empty);

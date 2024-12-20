@@ -11,17 +11,18 @@ public sealed partial class CNPJCompute : ICNPJCompute
     [GeneratedRegex("[\\./-]")]
     private static partial Regex CNPJMaskRegex();
 
+    [GeneratedRegex("[0-9A-Z]{12}[0-9]{2}")]
+    private static partial Regex CNPJCleanupRegex();
+
     [GeneratedRegex("[0-9A-Z]{2}[\\.][0-9A-Z]{3}[\\.][0-9A-Z]{3}[/][0-9A-Z]{4}-[0-9]{2}")]
     private static partial Regex CNPJFormatRegex();
 
     [GeneratedRegex("[0-9A-Z]{12}")]
     private static partial Regex CNPJValueRegex();
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     private readonly Func<int, int> _computeMultiplier;
 
     private readonly Func<long, int> _computeDigit;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     public CNPJCompute()
         : this(Modulus11Helper.CalculateMultiplier, Modulus11Helper.CalculateDigit) { }
@@ -69,13 +70,13 @@ public sealed partial class CNPJCompute : ICNPJCompute
 
         if (CNPJMaskRegex().IsMatch(value) && !CNPJFormatRegex().IsMatch(value))
         {
-           throw new ArgumentException(CheckDigit_Documento.InvalidCNPJFormat);
+           throw new ArgumentException(ResourcesFacade.GetString("InvalidCNPJFormat"));
         }
 
         string cnpj = CNPJMaskRegex().Replace(value, string.Empty);
-        if (!Regex.IsMatch(cnpj, "[0-9A-Z]{12}[0-9]{2}"))
+        if (!CNPJCleanupRegex().IsMatch(cnpj))
         {
-            throw new ArgumentException(CheckDigit_Documento.InvalidCNPJCleanedFormat);
+            throw new ArgumentException(ResourcesFacade.GetString("InvalidCNPJCleanedFormat"));
         }
 
         return cnpj;
@@ -127,7 +128,7 @@ public sealed partial class CNPJCompute : ICNPJCompute
         string cnpj = CNPJMaskRegex().Replace(valor, "");
         if (!CNPJValueRegex().IsMatch(cnpj))
         {
-            throw new ArgumentException(CheckDigit_Documento.InvalidCNPJ);
+            throw new ArgumentException(ResourcesFacade.GetString("InvalidCNPJ"));
         }
 
         string digito = CalculateDigit(cnpj);

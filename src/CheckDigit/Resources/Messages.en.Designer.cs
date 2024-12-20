@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CheckDigit {
+namespace CheckDigit.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CheckDigit {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CheckDigit {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CheckDigit() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CheckDigit {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CheckDigit.CheckDigit", typeof(CheckDigit).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CheckDigit.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,7 @@ namespace CheckDigit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Para caclulo de CNPJ deve-se informar a Filial.
-        /// </summary>
-        internal static string InvalidBranch {
-            get {
-                return ResourceManager.GetString("InvalidBranch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Não foi informado um número para efetuar o cálculo.
+        ///   Looks up a localized string similar to Not informed a number to check digit.
         /// </summary>
         internal static string InvalidNumber {
             get {

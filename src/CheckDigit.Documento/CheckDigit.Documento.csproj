@@ -16,20 +16,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CheckDigit.Documento.Designer.cs">
+    <Compile Remove="Resources\Messages.pt.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.pt.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>CheckDigit.Documento.resx</DependentUpon>
+      <DependentUpon>Messages.pt.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CheckDigit.Documento.resx">
+    <EmbeddedResource Update="Messages.pt.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CheckDigit.Documento.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.pt.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
+  
   <ItemGroup>
     <None Update="README.md">
       <Pack>True</Pack>

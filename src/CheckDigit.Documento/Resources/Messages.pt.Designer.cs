@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CheckDigit.Documento {
+namespace CheckDigit.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace CheckDigit.Documento {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CheckDigit_Documento {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CheckDigit_Documento() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CheckDigit.Documento {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CheckDigit.Documento.CheckDigit.Documento", typeof(CheckDigit_Documento).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CheckDigit.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,11 @@ namespace CheckDigit.Documento {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CNPJ deve estar no formato XXXXXXXXXXXX.
+        ///   Looks up a localized string similar to Not informed a number to check digit.
         /// </summary>
-        internal static string InvalidCNPJ {
+        internal static string InvalidNumber {
             get {
-                return ResourceManager.GetString("InvalidCNPJ", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CNPJ deve estar no formato XXXXXXXXXXXX99.
-        /// </summary>
-        internal static string InvalidCNPJCleanedFormat {
-            get {
-                return ResourceManager.GetString("InvalidCNPJCleanedFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99.
-        /// </summary>
-        internal static string InvalidCNPJFormat {
-            get {
-                return ResourceManager.GetString("InvalidCNPJFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CPF deve estar no formato 999.999.999-99.
-        /// </summary>
-        internal static string InvalidCPFFormat {
-            get {
-                return ResourceManager.GetString("InvalidCPFFormat", resourceCulture);
+                return ResourceManager.GetString("InvalidNumber", resourceCulture);
             }
         }
     }

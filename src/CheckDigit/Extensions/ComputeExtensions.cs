@@ -6,7 +6,7 @@ public static class ComputeExtensions
     {
         if (!int.TryParse(valor, out int number))
         {
-            throw new FormatException(CheckDigit.InvalidNumber);
+            throw new FormatException(ResourcesFacade.GetString("InvalidNumber"));
         }
 
         return number;
@@ -16,7 +16,7 @@ public static class ComputeExtensions
     {
         if (!long.TryParse(valor, out long number))
         {
-            throw new FormatException(CheckDigit.InvalidNumber);
+            throw new FormatException(ResourcesFacade.GetString("CheckDigit.InvalidNumber"));
         }
 
         return number;
