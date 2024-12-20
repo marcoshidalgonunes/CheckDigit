@@ -21,7 +21,7 @@ steps:
 - script: dotnet test src/CheckDigit.sln
   displayName: 'Run tests'
 
-- script: dotnet build --configuration $(buildConfiguration) --no-restore
+- script: dotnet build src/CheckDigit.sln --configuration $(buildConfiguration) --no-restore
   displayName: 'Build Solution'
 
 - script: |
