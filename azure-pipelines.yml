@@ -12,6 +12,9 @@ steps:
 - script: dotnet restore
   displayName: 'Restore NuGet Packages'
 
+- script: dotnet test
+  displayName: 'Run tests'
+
 - script: dotnet build --configuration Release --no-restore
   displayName: 'Build Solution'
 
@@ -21,15 +24,5 @@ steps:
     done
   displayName: 'Pack Projects'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'.csproj src/ProjectB/ProjectB.csproj; do
-      dotnet pack $project --configuration Release --output $(Build.ArtifactStagingDirectory)
-    done
-  displayName: 'Pack Projects'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
+- script: dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg --api-key $(System.AccessToken) --source https://pkgs.dev.azure.com/marcoshidalgonunes/CheckDigit/_packaging/CheckDigit/nuget/v3/index.json
+  displayName: 'Push NuGet Package'
