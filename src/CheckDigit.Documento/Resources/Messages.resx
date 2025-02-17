@@ -126,7 +126,7 @@
     <comment>CNPJ está em formato inválido</comment>
   </data>
   <data name="InvalidCNPJFormat" xml:space="preserve">
-    <value>CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99</value>
+    <value>CNPJ deve estar no formato XX.XXX.XXX/XXXX-99</value>
     <comment>CNPJ está em formato inválido.</comment>
   </data>
   <data name="InvalidCPFFormat" xml:space="preserve">

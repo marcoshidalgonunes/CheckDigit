@@ -121,7 +121,7 @@ public class CNPJComputeTest
 
         // Assert
         ArgumentException exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("CNPJ deve estar no formato XX.XXX.XXXX/XXXX-99", exception.Message);
+        Assert.Equal("CNPJ deve estar no formato XX.XXX.XXX/XXXX-99", exception.Message);
     }
 
     [Fact]
