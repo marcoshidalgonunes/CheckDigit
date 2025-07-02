@@ -6,7 +6,7 @@ namespace CheckDigit.Documento;
 /// <summary>
 /// Valida dígitos de CNPJ
 /// </summary>
-public sealed partial class CNPJCompute : ICNPJCompute
+public sealed partial class CNPJCompute : Documento, ICNPJCompute
 {
     [GeneratedRegex("[\\./-]")]
     private static partial Regex CNPJMaskRegex();
@@ -20,33 +20,8 @@ public sealed partial class CNPJCompute : ICNPJCompute
     [GeneratedRegex("[0-9A-Z]{12}")]
     private static partial Regex CNPJValueRegex();
 
-    private readonly Func<int, int> _computeMultiplier;
-
-    private readonly Func<long, int> _computeDigit;
-
     public CNPJCompute()
-        : this(Modulus11Helper.CalculateMultiplier, Modulus11Helper.CalculateDigit) { }
-
-    private CNPJCompute(Func<int, int> computeMultiplier, Func<long, int> computeDigit)
-    {
-        _computeMultiplier = computeMultiplier;
-        _computeDigit = computeDigit;
-    }
-
-    private long CalculateDigit(long valor)
-    {
-        long somatorio = 0;
-        int multiplicador = 1;
-        do
-        {
-            multiplicador = _computeMultiplier(multiplicador);
-
-            somatorio += valor % 10 * multiplicador;
-            valor /= 10;
-        } while (valor > 0);
-
-        return _computeDigit(somatorio % 11);
-    }
+        : base(Modulus11Helper.CalculateMultiplier, Modulus11Helper.CalculateDigit) { }
 
     private string CalculateDigit(string valor)
     {
@@ -55,13 +30,13 @@ public sealed partial class CNPJCompute : ICNPJCompute
 
         for (int posicao = valor.Length - 1; posicao >= 0; posicao--)
         {
-            multiplicador = _computeMultiplier(multiplicador);
+            multiplicador = ComputeMultiplier(multiplicador);
 
             int digito = valor[posicao] - '0';
             somatorio += digito * multiplicador;
         }
 
-        return _computeDigit(somatorio % 11).ToString();
+        return ComputeDigit(somatorio % 11).ToString();
     }
 
     private static string Cleanup(string value)
@@ -99,18 +74,6 @@ public sealed partial class CNPJCompute : ICNPJCompute
     /// Calcula dígito de CNPJ.
     /// </summary>
     /// <param name="cnpj">Número do CNPJ</param>
-    /// <returns>Dígito do CNPJ</returns>
-    public int Calculate(long cnpj)
-    {
-        long digito = CalculateDigit(cnpj);
-        cnpj = cnpj * 10 + digito;
-        return (int)((digito * 10) + CalculateDigit(cnpj));
-    }
-
-    /// <summary>
-    /// Calcula dígito de CNPJ.
-    /// </summary>
-    /// <param name="cnpj">Número do CNPJ</param>
     /// <param name="filial">Filial do PJ</param>
     /// <returns>Dígito do CNPJ</returns>
     public string Calculate(string cnpj, string filial)
@@ -123,7 +86,7 @@ public sealed partial class CNPJCompute : ICNPJCompute
     /// </summary>
     /// <param name="cnpj">Número do CNPJ</param>
     /// <returns>Dígito do CNPJ</returns>
-    public string Calculate(string valor)
+    public override string Calculate(string valor)
     {
         string cnpj = CNPJMaskRegex().Replace(valor, "");
         if (!CNPJValueRegex().IsMatch(cnpj))
@@ -152,7 +115,7 @@ public sealed partial class CNPJCompute : ICNPJCompute
     /// </summary>
     /// <param name="cnpj">Número do CNPJ</param>
     /// <returns>True para número do CNPJ válido</returns>
-    public bool Validate(long cnpj)
+    public override bool Validate(long cnpj)
     {
         long numero = cnpj / 1000000;
         int filial = (int)(cnpj % 1000000) / 100;
@@ -177,7 +140,7 @@ public sealed partial class CNPJCompute : ICNPJCompute
     /// </summary>
     /// <param name="cnpj">Número do CNPJ</param>
     /// <returns>True para número do CNPJ válido</returns>
-    public bool Validate(string valor)
+    public override bool Validate(string valor)
     {
         const int tamanhoDV = 2;
 

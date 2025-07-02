@@ -7,7 +7,7 @@ namespace CheckDigit.Documento;
 /// <summary>
 /// Valida dígitos de CPF
 /// </summary>
-public sealed partial class CPFCompute : Modulus11Compute
+public sealed partial class CPFCompute : Documento
 {
     [GeneratedRegex("[\\.-]")]
     private static partial Regex CPFMaskRegex();
@@ -31,18 +31,6 @@ public sealed partial class CPFCompute : Modulus11Compute
     }
 
     #region IModulusCompute members
-
-    /// <summary>
-    /// Calcula dígito de CPF.
-    /// </summary>
-    /// <param name="cpf">Número do CPF</param>
-    /// <returns>Dígito do CPF</returns>
-    public override int Calculate(long cpf)
-    {
-        int digito = base.Calculate(cpf);
-        cpf = cpf * 10 + digito;
-        return digito * 10 + base.Calculate(cpf);
-    }
 
     /// <summary>
     /// Calcula dígito de CPF.
