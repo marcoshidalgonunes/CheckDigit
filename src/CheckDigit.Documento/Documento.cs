@@ -8,7 +8,7 @@ namespace CheckDigit.Documento;
 
 public abstract class Documento(Func<int, int> computeMultiplier, Func<long, int> computeDigit) : Modulus11Compute(computeMultiplier, computeDigit)
 {
-    #region IModulusCompute members
+    #region ICompute members
 
     /// <summary>
     /// Calcula dígito de documento.

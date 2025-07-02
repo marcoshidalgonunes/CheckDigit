@@ -57,6 +57,39 @@ public sealed partial class CNPJCompute : Documento, ICNPJCompute
         return cnpj;
     }
 
+    #region IModulus11Compute members
+
+    /// <summary>
+    /// Valida número do CNPJ.
+    /// </summary>
+    /// <param name="cnpj">Número do CNPJ</param>
+    /// <returns>True para número do CNPJ válido</returns>
+    public override bool Validate(long cnpj)
+    {
+        long numero = cnpj / 1000000;
+        int filial = (int)(cnpj % 1000000) / 100;
+        int dv = (int)(cnpj % 100);
+        return Validate(numero, filial, dv);
+    }
+
+    /// <summary>
+    /// Valida número do CNPJ.
+    /// </summary>
+    /// <param name="cnpj">Número do CNPJ</param>
+    /// <returns>True para número do CNPJ válido</returns>
+    public override bool Validate(string valor)
+    {
+        const int tamanhoDV = 2;
+
+        string cnpj = Cleanup(valor);
+        string cnpjBase = cnpj[..^tamanhoDV];
+        string digitos = cnpj[^tamanhoDV..];
+
+        return Calculate(cnpjBase).Equals(digitos);
+    }
+
+    #endregion
+
     #region ICNPJCompute members
 
     /// <summary>
@@ -109,19 +142,6 @@ public sealed partial class CNPJCompute : Documento, ICNPJCompute
     {
         return dv.Equals(Calculate(cnpj, filial));
     }
-    
-    /// <summary>
-    /// Valida número do CNPJ.
-    /// </summary>
-    /// <param name="cnpj">Número do CNPJ</param>
-    /// <returns>True para número do CNPJ válido</returns>
-    public override bool Validate(long cnpj)
-    {
-        long numero = cnpj / 1000000;
-        int filial = (int)(cnpj % 1000000) / 100;
-        int dv = (int)(cnpj % 100);
-        return Validate(numero, filial, dv);
-    }
 
     /// <summary>
     /// Valida número do CNPJ.
@@ -133,22 +153,6 @@ public sealed partial class CNPJCompute : Documento, ICNPJCompute
     public bool Validate(string cnpj, string filial, string dv)
     {
         return Validate(cnpj + filial + dv);
-    }
-
-    /// <summary>
-    /// Valida número do CNPJ.
-    /// </summary>
-    /// <param name="cnpj">Número do CNPJ</param>
-    /// <returns>True para número do CNPJ válido</returns>
-    public override bool Validate(string valor)
-    {
-        const int tamanhoDV = 2;
-
-        string cnpj = Cleanup(valor);
-        string cnpjBase = cnpj[..^tamanhoDV];
-        string digitos = cnpj[^tamanhoDV..];
-
-        return Calculate(cnpjBase).Equals(digitos);
     }
 
     #endregion

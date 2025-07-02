@@ -30,7 +30,13 @@ public sealed partial class CPFCompute : Documento
         return CPFMaskRegex().Replace(value, string.Empty);
     }
 
-    #region IModulusCompute members
+    private static int CalculateDigit(long sum)
+    {
+        int resto = (int)sum % 11;
+        return resto < 2 ? 0 : (11 - resto);
+    }
+
+    #region IModulus11Compute members
 
     /// <summary>
     /// Calcula dígito de CPF.
@@ -40,12 +46,6 @@ public sealed partial class CPFCompute : Documento
     public override string Calculate(string cpf)
     {
         return Calculate(cpf.ConvertToInt32()).ToString("00", CultureInfo.InvariantCulture);
-    }
-
-    private static int CalculateDigit(long sum)
-    {
-        int resto = (int)sum % 11;
-        return resto < 2 ? 0 : (11 - resto);
     }
 
     /// <summary>
