@@ -24,11 +24,8 @@ steps:
 - script: dotnet build src/CheckDigit.sln --configuration $(buildConfiguration) --no-restore
   displayName: 'Build Solution'
 
-- script: |
-    for project in src/CheckDigit/CheckDigit.csproj src/CheckDigit.Documento/CheckDigit.Documento.csproj; do
-      dotnet pack $project --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
-    done
-  displayName: 'Pack Projects'
+- script: dotnet pack src/CheckDigit/CheckDigit.csproj --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Pack Project'
 
 - script: dotnet nuget push $(Build.ArtifactStagingDirectory)/*.nupkg --api-key $(System.AccessToken) --source https://pkgs.dev.azure.com/marcoshidalgonunes/CheckDigit/_packaging/CheckDigit/nuget/v3/index.json
   displayName: 'Push NuGet Package'
