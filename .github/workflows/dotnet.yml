@@ -32,4 +32,4 @@ jobs:
       run: dotnet pack src/CheckDigit/CheckDigit.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ github.workspace }}/artifacts
 
     - name: Publish NuGet Package
-      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://pkgs.dev.azure.com/marcoshidalgonunes/CheckDigit/_packaging/CheckDigit/nuget/v3/index.json
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
