@@ -8,7 +8,6 @@
     <FileVersion>0.90.0.0</FileVersion>
     <AssemblyVersion>0.90.0.0</AssemblyVersion>
     <Description>.NET Core C# library containing classes to compute and verify check digits using Modulus 10 and 11 algorithms.</Description>
-    <PackageReadmeFile>..\..\README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
