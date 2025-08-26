@@ -1,0 +1,35 @@
+name: CheckDigit Build and Publish
+
+on:
+  workflow_dispatch: # Manual trigger; change to 'push' or other if desired
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      BUILD_CONFIGURATION: Release
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.100'
+
+    - name: Restore NuGet Packages
+      run: dotnet restore src/CheckDigit.sln
+
+    - name: Run tests
+      run: dotnet test src/CheckDigit.sln
+
+    - name: Build Solution
+      run: dotnet build src/CheckDigit.sln --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
+
+    - name: Pack Project
+      run: dotnet pack src/CheckDigit/CheckDigit.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ github.workspace }}/artifacts
+
+    - name: Publish NuGet Package
+      run: dotnet nuget push ./artifacts/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://pkgs.dev.azure.com/marcoshidalgonunes/CheckDigit/_packaging/CheckDigit/nuget/v3/index.json
