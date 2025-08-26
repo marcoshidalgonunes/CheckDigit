@@ -53,7 +53,7 @@ Usage examples and unit tests are available in the `CheckDigit.Tests` project wi
 
 ## License
 
-This project is licensed under the GPL-3.0 License.
+This library is licensed under the [GNU General Public License v3.0](../LICENSE).
 
 ## Contributing
 
